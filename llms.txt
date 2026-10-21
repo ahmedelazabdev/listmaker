@@ -1,0 +1,19 @@
+# Make List Online
+> Browser-Based List Formatter, Deduplicator, Sorter & Markdown/HTML Converter
+
+## Project Overview
+Make List Online is a high-speed, zero-dependency client-side utility built to convert unstructured plain text lines into clean, standardized list formats including bulleted, numbered, Markdown checklists, HTML tags, CSV strings, and JSON arrays.
+
+## Canonical URL
+https://ahmedelazabdev.github.io/listmaker/
+
+## Core Features
+- Real-time serialization into Bulleted (•), Numbered (1.), Markdown (- [ ]), HTML (<ul><li>), CSV, and JSON formats.
+- Instant deduplication: Purges repeating lines and displays exact count of removed duplicates.
+- Alphabetical sorting with full Unicode collation (A-Z and Z-A) and Fisher-Yates random shuffling.
+- Custom Prefix & Suffix injection: Add quotes, SQL wrappers, or custom tags around every line simultaneously.
+- White-space trimmer and blank-line eliminator.
+- 100% Client-Side Privacy: All text manipulation runs locally in the browser with zero server transmission.
+
+## Target Audience
+Writers, web developers, data analysts, students, project managers, and content creators organizing multi-line data.
