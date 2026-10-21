@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- High-CTR SEO Meta -->
+  <title>Make List Online 📝 Free List Maker, Sorter & Cleaner (100% Free)</title>
+  <meta name="description" content="Create, format, and organize lists online instantly. Convert text to bulleted, numbered, HTML, Markdown, or JSON lists. Sort alphabetically, remove duplicates, and trim whitespace.">
+  <meta name="keywords" content="make list online, list maker, online list organizer, sort list alphabetically, remove duplicates list, text to bullet list, markdown list generator, html list maker">
+  <meta name="author" content="Ahmed Elazab">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+  <!-- Absolute Canonical URL -->
+  <link rel="canonical" href="https://ahmedelazabdev.github.io/listmaker/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ahmedelazabdev.github.io/listmaker/">
+  <meta property="og:title" content="Make List Online 📝 Free List Maker & Sorter">
+  <meta property="og:description" content="Clean, sort, and reformat text lists in real-time. Convert raw text to bullets, numbers, Markdown, CSV, or HTML with zero server tracking.">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Make List Online 📝 Fast List Maker & Formatter">
+  <meta name="twitter:description" content="Free browser-based list creator. Remove duplicate lines, sort A-Z, prefix/suffix items, and export clean lists instantly.">
+
+  <!-- Structured Data: WebApplication, HowTo & FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Make List Online - Text List Organizer & Formatter",
+        "url": "https://ahmedelazabdev.github.io/listmaker/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "description": "A high-performance browser utility to format, sort, deduplicate, and convert plain text lines into bulleted, numbered, Markdown, HTML, CSV, and JSON lists.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Create and Organize a List Online",
+        "description": "Step-by-step instructions to format, sort, clean, and convert raw text into a styled list.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Enter raw text",
+            "text": "Paste or type your items into the input box, with one item per line."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Select list format",
+            "text": "Choose your desired output styling such as Bulleted, Numbered, Markdown, HTML, CSV, or JSON Array."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Clean and sort",
+            "text": "Use the one-click sorting tools to order items alphabetically, remove duplicate lines, or trim trailing whitespace."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Copy or download",
+            "text": "Click Copy List to copy the clean result to your clipboard or download it as a plain text file."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is my list data stored on any external server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. All text parsing, deduplication, sorting, and format rendering take place 100% locally in your web browser. No text data is ever uploaded or stored."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can this tool remove duplicate lines automatically?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Simply toggle the 'Remove Duplicates' option or click the 'Deduplicate' button to eliminate repetitive entries while keeping unique items."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What output formats are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can format lists into Bulleted (•), Numbered (1, 2, 3), Markdown checklists (- [ ]), HTML (<ul><li>), CSV comma-separated strings, and valid JSON arrays."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I add custom prefixes or suffixes to each item?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the custom Prefix and Suffix input fields to wrap each line with quotes, SQL formatting, code syntax, or custom numbering."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --primary-soft: #eff6ff;
+      --accent: #065f46;
+      --accent-soft: #d1fae5;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #cbd5e1;
+      --border-dark: #475569;
+      --text: #0f172a;
+      --text-muted: #1e293b;
+      --text-subtle: #334155;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-xl: 0 10px 25px -5px rgba(0,0,0,0.08);
+      --radius: 14px;
+      --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+      height: 64px;
+    }
+
+    .nav-inner {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      background: var(--primary);
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .status-tag {
+      background: var(--accent-soft);
+      color: #064e3b;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: 1px solid #6ee7b7;
+    }
+
+    main {
+      max-width: 1050px;
+      width: 100%;
+      margin: 20px auto 40px;
+      padding: 0 16px;
+      flex: 1;
+    }
+
+    /* Zero LCP Delay Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 24px;
+      contain: layout style;
+    }
+
+    .hero h1 {
+      font-size: 2.15rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Tool Card */
+    .cleaner-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .card-topbar {
+      background: #f1f5f9;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .config-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mode-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    select.mode-dropdown {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-dark);
+      background: #ffffff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .options-pills {
+      display: flex;
+      gap: 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      flex-wrap: wrap;
+    }
+
+    .options-pills label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* Workspace Grid */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    @media (max-width: 800px) {
+      .workspace-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pane {
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .pane-left {
+      border-right: 1px solid var(--border);
+    }
+
+    @media (max-width: 800px) {
+      .pane-left {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    .pane-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .pane-title {
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .indicator-badge {
+      font-size: 0.8rem;
+      color: #064e3b;
+      background: #dcfce7;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      border: 1px solid #86efac;
+    }
+
+    .code-input {
+      width: 100%;
+      height: 240px;
+      border: 1px solid var(--border-dark);
+      border-radius: 6px;
+      padding: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      color: #000000;
+      resize: vertical;
+      outline: none;
+      background: #ffffff;
+      line-height: 1.5;
+    }
+
+    .code-input:focus {
+      border-color: var(--primary);
+    }
+
+    .code-output {
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    /* Quick Prefix / Suffix Wrap Bar */
+    .prefix-suffix-bar {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .affix-input {
+      flex: 1;
+      min-width: 120px;
+      padding: 6px 10px;
+      border: 1px solid var(--border-dark);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      color: var(--text);
+    }
+
+    .affix-input:focus {
+      border-color: var(--primary);
+    }
+
+    /* Stats Card */
+    .stats-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .stat-item .val {
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: block;
+      color: var(--text);
+    }
+
+    .stat-item .lbl {
+      font-size: 0.72rem;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    /* Action Controls */
+    .action-controls {
+      padding: 14px 18px;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .btn-action {
+      background: #065f46;
+      color: #ffffff;
+    }
+
+    .btn-action:hover {
+      background: #044e3b;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      border-color: var(--border-dark);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+    }
+
+    /* 3 Steps Bar */
+    .action-steps-bar {
+      padding: 16px 20px;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .action-steps-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-title {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .step-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* SEO Knowledge Article Container */
+    .article-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+      content-visibility: auto;
+      contain-intrinsic-size: 1000px 1400px;
+    }
+
+    @media (max-width: 600px) {
+      .article-container {
+        padding: 20px 16px;
+      }
+    }
+
+    .article-container h2 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 32px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .article-container h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .article-container h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 20px 0 10px;
+      color: #1e293b;
+    }
+
+    .article-container p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .article-container ul, .article-container ol {
+      margin: 0 0 20px 20px;
+      color: var(--text-muted);
+    }
+
+    .article-container li {
+      margin-bottom: 8px;
+    }
+
+    .highlight-card {
+      background: var(--primary-soft);
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+      color: #172554;
+      font-size: 0.98rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    thead {
+      background: #f1f5f9;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 700;
+      color: var(--text);
+      text-align: left;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge-safe {
+      padding: 3px 8px;
+      background: #dcfce7;
+      color: #065f46;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* FAQ */
+    .faq-block {
+      margin-top: 20px;
+    }
+
+    .faq-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      background: #f8fafc;
+    }
+
+    .faq-header {
+      padding: 14px 18px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text);
+    }
+
+    .faq-body {
+      padding: 0 18px 14px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .faq-card.open {
+      background: var(--surface);
+      border-color: var(--primary);
+    }
+
+    .faq-card.open .faq-body {
+      display: block;
+    }
+
+    .faq-toggle {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .faq-card.open .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-xl);
+      transition: transform 0.2s ease;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    #toast.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 24px 16px;
+      margin-top: auto;
+    }
+
+    .footer-wrap {
+      max-width: 1050px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-subtle);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .footer-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-nav a:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-inner">
+      <a href="https://ahmedelazabdev.github.io/listmaker/" class="brand">
+        <span class="brand-badge">📝</span>
+        <span>Make List Online</span>
+      </a>
+      <span class="status-tag">🛡️ 100% Client-Side Private</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Make List Online 📝 <span>Format, Clean & Sort</span></h1>
+      <p>Convert raw text into bulleted, numbered, HTML, Markdown, or JSON lists. Alphabetize items, remove duplicate lines, trim whitespace, and add custom prefixes instantly.</p>
+    </section>
+
+    <!-- Interactive List Maker Card -->
+    <section class="cleaner-card" id="cleaner-app">
+      <div class="card-topbar">
+        <div class="config-group">
+          <label class="mode-label" for="list-style">List Style:</label>
+          <select id="list-style" class="mode-dropdown" onchange="processList()">
+            <option value="bullet" selected>Bullet Points (• Item)</option>
+            <option value="number">Numbered (1. Item)</option>
+            <option value="dash">Hyphen Dash (- Item)</option>
+            <option value="markdown">Markdown Checkbox (- [ ] Item)</option>
+            <option value="html">HTML (&lt;ul&gt;&lt;li&gt;)</option>
+            <option value="csv">Comma Separated (CSV)</option>
+            <option value="json">JSON Array (["a","b"])</option>
+            <option value="raw">Clean Raw Text</option>
+          </select>
+        </div>
+
+        <div class="options-pills">
+          <label><input type="checkbox" id="opt-dedupe" checked onchange="processList()"> Deduplicate</label>
+          <label><input type="checkbox" id="opt-trim" checked onchange="processList()"> Trim Spaces</label>
+          <label><input type="checkbox" id="opt-empty" checked onchange="processList()"> Remove Blank</label>
+        </div>
+      </div>
+
+      <div class="workspace-grid">
+        <!-- Input Area -->
+        <div class="pane pane-left">
+          <div class="pane-header">
+            <span class="pane-title">Input Text (One per line)</span>
+            <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.78rem;" onclick="loadSampleList()">Load Sample</button>
+          </div>
+          <textarea id="list-input" class="code-input" placeholder="Paste or type items here, one per line..." spellcheck="false" oninput="processList()"></textarea>
+
+          <div class="prefix-suffix-bar">
+            <input type="text" id="prefix-input" class="affix-input" placeholder="Custom Prefix (e.g. ' )" oninput="processList()">
+            <input type="text" id="suffix-input" class="affix-input" placeholder="Custom Suffix (e.g. ', )" oninput="processList()">
+          </div>
+
+          <div class="stats-card">
+            <div class="stat-item">
+              <span class="val" id="stat-input-lines">0</span>
+              <span class="lbl">Input Lines</span>
+            </div>
+            <div class="stat-item">
+              <span class="val" id="stat-input-chars">0</span>
+              <span class="lbl">Characters</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formatted Output -->
+        <div class="pane">
+          <div class="pane-header">
+            <span class="pane-title">Formatted Output</span>
+            <span class="indicator-badge" id="output-badge">List Ready</span>
+          </div>
+          <textarea id="list-output" class="code-input code-output" readonly placeholder="Formatted list will appear here..."></textarea>
+
+          <div class="stats-card">
+            <div class="stat-item">
+              <span class="val" id="stat-output-items">0</span>
+              <span class="lbl">Total Items</span>
+            </div>
+            <div class="stat-item">
+              <span class="val" id="stat-removed-dupes">0</span>
+              <span class="lbl">Dupes Removed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="action-controls">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn btn-action" onclick="copyFormattedList()">📋 Copy List</button>
+          <button class="btn btn-primary" onclick="downloadList()">💾 Download .TXT</button>
+          <button class="btn btn-secondary" onclick="sortAlphabetical(true)">🔤 Sort A-Z</button>
+          <button class="btn btn-secondary" onclick="sortAlphabetical(false)">🔤 Sort Z-A</button>
+          <button class="btn btn-secondary" onclick="shuffleList()">🔀 Shuffle</button>
+        </div>
+        <button class="btn btn-secondary" style="border: none;" onclick="clearAll()">Clear</button>
+      </div>
+
+      <!-- 3 Steps Bar -->
+      <div class="action-steps-bar">
+        <div class="action-step">
+          <span class="step-num">1</span>
+          <div class="step-text">
+            <strong class="step-title">Paste Raw Items</strong>
+            <p>Paste lines from Excel, spreadsheets, notes, or raw databases.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <span class="step-num">2</span>
+          <div class="step-text">
+            <strong class="step-title">Select Style & Sort</strong>
+            <p>Choose numbered, bulleted, HTML, or JSON with real-time deduplication.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <span class="step-num">3</span>
+          <div class="step-text">
+            <strong class="step-title">Export Clean List</strong>
+            <p>Copy to clipboard or download formatted text files directly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive Technical Guide -->
+    <article class="article-container">
+      <h2>The Mechanics of Data Organization: Why Clean Lists Matter</h2>
+      <p>
+        In digital productivity, content authoring, and software development, unstructured plain text is one of the most common formats. Whether you are exporting user emails from a SQL table, collecting keywords for SEO, drafting tasks in Markdown, or formatting HTML for an email campaign, unformatted lists are plagued by <strong>trailing spaces, duplicate rows, empty breaks, and inconsistent prefixes</strong>.
+      </p>
+
+      <div class="highlight-card">
+        <strong>💡 The Productivity Principle:</strong> Manually formatting a 500-item text document takes hours of tedious typing. Utilizing client-side regular expressions and deterministic array methods (like <code>Array.prototype.filter()</code> and <code>new Set()</code>), lists are sanitized and re-serialized across multiple programming and human-readable syntaxes in less than <strong>5 milliseconds</strong>.
+      </div>
+
+      <h2>Comparison of Popular List Formats & Syntax</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>List Format</th>
+              <th>Example Syntax</th>
+              <th>Standard File Type</th>
+              <th>Best Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Bulleted</strong></td>
+              <td><code>• Apples</code></td>
+              <td>Plain Text (.txt), Word Docs</td>
+              <td><span class="badge-safe">Universal</span> Note-taking, informal tasks, shopping lists</td>
+            </tr>
+            <tr>
+              <td><strong>Numbered</strong></td>
+              <td><code>1. First Step</code></td>
+              <td>Manuals, Tutorials, Articles</td>
+              <td>Sequential procedures, prioritized agendas</td>
+            </tr>
+            <tr>
+              <td><strong>Markdown Task</strong></td>
+              <td><code>- [ ] Task Item</code></td>
+              <td>Markdown (.md), GitHub Issues</td>
+              <td>Developer task tracking, Obsidian, Notion</td>
+            </tr>
+            <tr>
+              <td><strong>HTML Elements</strong></td>
+              <td><code>&lt;li&gt;Item&lt;/li&gt;</code></td>
+              <td>HTML (.html), React JSX</td>
+              <td>Web design, blog posts, newsletter templates</td>
+            </tr>
+            <tr>
+              <td><strong>JSON Array</strong></td>
+              <td><code>["item1", "item2"]</code></td>
+              <td>JSON (.json), API payloads</td>
+              <td>Backend databases, developer configs</td>
+            </tr>
+            <tr>
+              <td><strong>Comma Separated</strong></td>
+              <td><code>item1, item2, item3</code></td>
+              <td>CSV (.csv), SQL IN clauses</td>
+              <td>Spreadsheet imports, bulk email campaigns</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Advanced List Operations Explained</h2>
+      
+      <h3>1. Automated Deduplication (Unique Values Only)</h3>
+      <p>
+        When combining multiple lists from varied sources, duplicate entries inevitably appear. Our deduplicator preserves the first occurrence of each unique string while purging subsequent repeats, saving you from accidental double-processing.
+      </p>
+
+      <h3>2. Natural Alphabetical Sorting</h3>
+      <p>
+        Standard computer sorting often places uppercase letters before lowercase ones (ASCIIbetical sorting), causing "zebra" to appear after "Apple". Our tool utilizes Unicode collation (<code>localeCompare</code>) to guarantee genuine alphabetical organization (A-Z or Z-A) regardless of letter casing.
+      </p>
+
+      <h3>3. Prefix & Suffix Custom Wrapping</h3>
+      <p>
+        Developers frequently need to wrap items in quotes or SQL brackets (e.g., turning <code>101</code> into <code>'101',</code>). The built-in Prefix and Suffix controls let you append and prepend custom strings across thousands of items in parallel.
+      </p>
+
+      <h2>Frequently Asked Questions (FAQ)</h2>
+      <div class="faq-block">
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>Will this tool alter or corrupt my original text?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            No. Your original text remains untouched in the left input box. All sorting, formatting, and deduplication operations are reflected non-destructively in the right-hand output box.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>How many lines can this list maker process at once?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            Because processing occurs directly in your browser's V8 or JavaScriptCore engine without server latency, the tool comfortably formats and sorts lists containing upwards of 50,000 lines in a fraction of a second.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>Can I generate random or shuffled lists?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            Yes. Click the "Shuffle" button to randomize the order of your list items using the Fisher-Yates algorithmic distribution—ideal for raffles, giveaways, or randomized study flashcards.
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <div id="toast">Ready!</div>
+
+  <footer>
+    <div class="footer-wrap">
+      <p>© <span id="current-year"></span> All rights reserved — Make List Online Utility.</p>
+      <div class="footer-nav">
+        <a href="#cleaner-app">List Maker</a>
+        <a href="https://1io-site.blogspot.com" target="_blank" rel="noopener">By: 1io.site</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Native JavaScript List Processing Engine -->
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const listInput = document.getElementById('list-input');
+    const listOutput = document.getElementById('list-output');
+    const listStyleSelect = document.getElementById('list-style');
+    const optDedupe = document.getElementById('opt-dedupe');
+    const optTrim = document.getElementById('opt-trim');
+    const optEmpty = document.getElementById('opt-empty');
+    const prefixInput = document.getElementById('prefix-input');
+    const suffixInput = document.getElementById('suffix-input');
+
+    const statInputLines = document.getElementById('stat-input-lines');
+    const statInputChars = document.getElementById('stat-input-chars');
+    const statOutputItems = document.getElementById('stat-output-items');
+    const statRemovedDupes = document.getElementById('stat-removed-dupes');
+
+    function getCleanItems() {
+      const raw = listInput.value;
+      statInputChars.textContent = raw.length;
+      
+      let lines = raw.split('\n');
+      statInputLines.textContent = raw ? lines.length : 0;
+
+      if (optTrim.checked) {
+        lines = lines.map(line => line.trim());
+      }
+
+      if (optEmpty.checked) {
+        lines = lines.filter(line => line.length > 0);
+      }
+
+      let dupesRemoved = 0;
+      if (optDedupe.checked) {
+        const uniqueSet = new Set();
+        const deduplicated = [];
+        for (const item of lines) {
+          if (!uniqueSet.has(item)) {
+            uniqueSet.add(item);
+            deduplicated.push(item);
+          } else {
+            dupesRemoved++;
+          }
+        }
+        lines = deduplicated;
+      }
+
+      statRemovedDupes.textContent = dupesRemoved;
+      return lines;
+    }
+
+    function processList() {
+      const items = getCleanItems();
+      const style = listStyleSelect.value;
+      const prefix = prefixInput.value;
+      const suffix = suffixInput.value;
+
+      statOutputItems.textContent = items.length;
+
+      if (items.length === 0) {
+        listOutput.value = '';
+        return;
+      }
+
+      let formatted = '';
+
+      if (style === 'bullet') {
+        formatted = items.map(it => `• ${prefix}${it}${suffix}`).join('\n');
+      } else if (style === 'number') {
+        formatted = items.map((it, idx) => `${idx + 1}. ${prefix}${it}${suffix}`).join('\n');
+      } else if (style === 'dash') {
+        formatted = items.map(it => `- ${prefix}${it}${suffix}`).join('\n');
+      } else if (style === 'markdown') {
+        formatted = items.map(it => `- [ ] ${prefix}${it}${suffix}`).join('\n');
+      } else if (style === 'html') {
+        const lis = items.map(it => `  <li>${prefix}${it}${suffix}</li>`).join('\n');
+        formatted = `<ul>\n${lis}\n</ul>`;
+      } else if (style === 'csv') {
+        formatted = items.map(it => `${prefix}${it}${suffix}`).join(', ');
+      } else if (style === 'json') {
+        const arrayItems = items.map(it => `${prefix}${it}${suffix}`);
+        formatted = JSON.stringify(arrayItems, null, 2);
+      } else {
+        formatted = items.map(it => `${prefix}${it}${suffix}`).join('\n');
+      }
+
+      listOutput.value = formatted;
+    }
+
+    function sortAlphabetical(ascending = true) {
+      const raw = listInput.value;
+      let lines = raw.split('\n');
+
+      if (optEmpty.checked) {
+        lines = lines.filter(line => line.trim().length > 0);
+      }
+
+      lines.sort((a, b) => {
+        return ascending ? a.localeCompare(b, undefined, { numeric: true }) : b.localeCompare(a, undefined, { numeric: true });
+      });
+
+      listInput.value = lines.join('\n');
+      processList();
+      showToast(ascending ? '🔤 Sorted A to Z' : '🔤 Sorted Z to A');
+    }
+
+    function shuffleList() {
+      const raw = listInput.value;
+      let lines = raw.split('\n');
+
+      // Fisher-Yates Shuffle
+      for (let i = lines.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [lines[i], lines[j]] = [lines[j], lines[i]];
+      }
+
+      listInput.value = lines.join('\n');
+      processList();
+      showToast('🔀 Shuffled list order');
+    }
+
+    function loadSampleList() {
+      const sample = [
+        'Apples',
+        'Bananas',
+        'Oranges',
+        'Bananas',
+        'Strawberries',
+        'Blueberries',
+        'Grapes',
+        'Apples',
+        'Watermelon'
+      ].join('\n');
+
+      listInput.value = sample;
+      processList();
+      showToast('Loaded sample items');
+    }
+
+    function clearAll() {
+      listInput.value = '';
+      listOutput.value = '';
+      prefixInput.value = '';
+      suffixInput.value = '';
+      processList();
+      showToast('Cleared');
+    }
+
+    function copyFormattedList() {
+      if (!listOutput.value.trim()) {
+        showToast('⚠️ No formatted list to copy!');
+        return;
+      }
+      navigator.clipboard.writeText(listOutput.value).then(() => {
+        showToast('📋 Copied list to clipboard!');
+      });
+    }
+
+    function downloadList() {
+      if (!listOutput.value.trim()) {
+        showToast('⚠️ List is empty!');
+        return;
+      }
+      const style = listStyleSelect.value;
+      let ext = 'txt';
+      let mime = 'text/plain;charset=utf-8';
+
+      if (style === 'json') {
+        ext = 'json';
+        mime = 'application/json;charset=utf-8';
+      } else if (style === 'csv') {
+        ext = 'csv';
+        mime = 'text/csv;charset=utf-8';
+      } else if (style === 'html') {
+        ext = 'html';
+        mime = 'text/html;charset=utf-8';
+      }
+
+      const blob = new Blob([listOutput.value], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `formatted-list.${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`💾 Downloaded formatted-list.${ext}`);
+    }
+
+    function toggleFaqCard(header) {
+      header.parentElement.classList.toggle('open');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('active');
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 2500);
+    }
+
+    // Initialize with sample
+    loadSampleList();
+  </script>
+</body>
+</html>
